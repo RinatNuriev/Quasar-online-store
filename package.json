@@ -5,10 +5,12 @@
   "productName": "Quasar App",
   "author": "RinatNuriev <justinnuriev@gmail.com>",
   "private": true,
+  "homepage": "https://github.com/RinatNuriev/Quasar-online-store",
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
-    "build": "quasar build"
+    "build": "quasar build",
+    "deploy": "gh-pages -d dist/spa"
   },
   "dependencies": {
     "@clerk/clerk-js": "^4.39.0",
@@ -24,7 +26,8 @@
   },
   "devDependencies": {
     "@quasar/app-webpack": "^3.0.0",
-    "@quasar/quasar-app-extension-apollo": "^2.0.0-beta.5"
+    "@quasar/quasar-app-extension-apollo": "^2.0.0-beta.5",
+    "gh-pages": "^5.0.0"
   },
   "browserslist": [
     "last 10 Chrome versions",

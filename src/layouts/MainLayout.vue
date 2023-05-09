@@ -18,7 +18,6 @@
             style="width: 75px"
             dense
             label="Login"
-            to="/catalog"
             type="button"
             @click="login"
           />
@@ -37,13 +36,17 @@
     </q-header>
 
     <q-drawer
-      show-if-above
       v-model="leftDrawerOpen"
       side="left"
       bordered
       class="column wrap justify-start items-start q-pa-xl MsMainLayoutDrawer"
     >
-      <q-btn to="/" color="secondary" label="Catalog" class="q-mb-sm"></q-btn>
+      <q-btn
+        to="/catalog"
+        color="secondary"
+        label="Catalog"
+        class="q-mb-sm"
+      ></q-btn>
       <q-btn
         color="secondary"
         label="Add product"
@@ -51,7 +54,12 @@
         class="q-mb-sm"
       ></q-btn>
 
-      <q-btn-dropdown class="glossy" color="primary" label="Categories">
+      <q-btn-dropdown
+        class="glossy"
+        color="primary"
+        label="Categories"
+        v-show="store.isCatalog"
+      >
         <div class="row no-wrap q-pa-md">
           <q-form @submit="onSubmit">
             <div class="column">
@@ -85,7 +93,7 @@
       </q-btn-dropdown>
     </q-drawer>
 
-    <q-page-container class="q-pa-xl">
+    <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>
@@ -133,17 +141,14 @@ export default {
     const logout = async () => {
       await window.Clerk.signOut();
     };
-
     const login = async ({ email, password }) => {
       window.Clerk.openSignIn();
     };
 
     const leftDrawerOpen = ref(false);
-
     const tshirt = ref(null);
     const shoes = ref(null);
     const underwear = ref(null);
-
     const store = useStore();
     const cart = computed(() => store.cart ?? []);
     const router = useRouter();
@@ -181,7 +186,6 @@ export default {
       store.types = data;
       setFilter(data);
     };
-
     const toMainPage = () => {
       router.push({ path: "/" });
     };
@@ -211,6 +215,7 @@ export default {
       getAllItems,
       login,
       logout,
+      store,
     };
   },
 };

@@ -10,6 +10,7 @@ export const useStore = defineStore("filter", {
     cart: [],
     types: [],
     allTypes: [],
+    isCatalog: false
   }),
   getters: {},
   actions: {

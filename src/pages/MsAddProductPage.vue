@@ -26,13 +26,15 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 import { useMutation, useQuery } from "@vue/apollo-composable";
 import { queries } from "src/graphql/queries";
 import { useStore } from "src/store/filter";
+import { useQuasar } from "quasar";
 export default {
   name: "MsAddProduct",
   setup() {
+    const $q = useQuasar();
     const store = useStore();
 
     const { mutate: addClothes } = useMutation(queries.addClothes);
@@ -46,35 +48,49 @@ export default {
       newType: ref(null),
     });
 
-    const onSubmit = async () => {
-      if (form.value.model === "New") {
-        const { data } = await addClothes({
-          type: form.value.newType,
-          description: form.value.description,
-          price: form.value.price,
-          img: form.value.image,
-        });
-      } else {
-        const { data } = await addClothes({
-          type: form.value.model,
-          description: form.value.description,
-          price: form.value.price,
-          img: form.value.image,
-        });
-      }
-      form.value.model = null;
-      form.value.description = null;
-      form.value.price = null;
-      form.value.image = null;
-      form.value.newType = null;
+    const showNotif = () => {
+      $q.notify({
+        type: "positive",
+        message: "Product successfully added",
+      });
+    };
 
-      const getAll = useQuery(() => queries.getAll);
-      store.items = computed(() => getAll.result.value?.my_shop ?? []);
+    const onSubmit = async () => {
+      try {
+        if (form.value.model === "New") {
+          const { data } = await addClothes({
+            type: form.value.newType,
+            description: form.value.description,
+            price: form.value.price,
+            img: form.value.image,
+          });
+        } else {
+          const { data } = await addClothes({
+            type: form.value.model,
+            description: form.value.description,
+            price: form.value.price,
+            img: form.value.image,
+          });
+        }
+        form.value.model = null;
+        form.value.description = null;
+        form.value.price = null;
+        form.value.image = null;
+        form.value.newType = null;
+
+        const getAll = useQuery(() => queries.getAll);
+        store.items = computed(() => getAll.result.value?.my_shop ?? []);
+
+        showNotif();
+      } catch (e) {
+        console.log(e.message);
+      }
     };
 
     return {
       form,
       onSubmit,
+      showNotif,
     };
   },
 };

@@ -80,4 +80,15 @@ export const queries = {
       }
     }
   `,
+  searchData: gql`
+    query ($like: String!) {
+      my_shop(where: { description: { _ilike: $like } }) {
+        id
+        img
+        price
+        type
+        description
+      }
+    }
+  `,
 };

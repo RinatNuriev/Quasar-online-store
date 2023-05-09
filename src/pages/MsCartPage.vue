@@ -5,7 +5,7 @@
     <div v-else>
       <div class="flex justify-between cart_btns">
         <q-btn class="q-ma-xs" color="grey" @click="dialog = true">Buy</q-btn>
-        <q-btn class="q-ma-xs" to="/" label="Back to catalog"></q-btn>
+        <q-btn class="q-ma-xs" to="/catalog" label="Back to catalog"></q-btn>
       </div>
       <div class="q-pa-md row justify-center q-gutter-md">
         <ms-card

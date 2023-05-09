@@ -2,7 +2,6 @@
   <q-layout>
     <q-page-container>
       <q-page class="flex flex-center" style="font-family: Lato">
-        <!--        <div id="particles-js"></div>-->
         <q-card
           :style="$q.platform.is.desktop ? 'width:55%;' : ''"
           class="row ms-login items-center q-pa-none q-ma-none shadow-24"
@@ -14,7 +13,6 @@
             horizontal
           >
             <div class="text-center full-width">
-              <!-- <div><img src="images/logo.png" style="width: 33%"/></div> -->
               <div class="text-weight-bolder text-white text-h6">myShop</div>
               <div class="text-caption text-white">Closed sale store</div>
             </div>
@@ -24,7 +22,6 @@
           >
             <q-card-section class="items-center">
               <div>
-                <!-- <div v-if="!$q.platform.is.desktop" class="text-weight-bolder text-center q-mb-md text-primary text-h6">Quasar Shopping</div> -->
                 <q-form
                   :style="
                     $q.platform.is.desktop
