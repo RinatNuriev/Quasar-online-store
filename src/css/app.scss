@@ -1,0 +1,28 @@
+// app global css in SCSS form
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+}
+.MsTitle {
+  margin-top: 30px;
+  padding-bottom: 20px;
+}
+.btn {
+  margin-bottom: 10px;
+}
+.MsProductPageImg {
+  object-fit: contain;
+  max-height: 500px;
+  max-width: 500px;
+}
+.MsMainLayoutDrawer {
+  background: url("../../public/img/drawerbg.jpg");
+  background-position: right;
+}
+.cart_btns {
+  max-width: 600px;
+  margin: auto;
+}
