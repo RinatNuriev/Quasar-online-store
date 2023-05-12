@@ -12,75 +12,32 @@
           </q-avatar>
         </q-toolbar-title>
         <q-item id="auth-links">
-          <q-btn
-            color="white text-black"
-            size="sm"
-            style="width: 75px"
-            dense
-            label="Login"
-            type="button"
-            @click="login"
-          />
+          <q-btn color="white text-black" size="sm" style="width: 75px" dense label="Login" type="button"
+            @click="login" />
         </q-item>
         <div class="q-ml-md">
           <div id="user-button"></div>
         </div>
 
-        <q-btn to="/cart" color="primary" class="q-ml-md"
-          ><q-icon name="shopping_cart"></q-icon> {{ cart.length }}</q-btn
-        >
+        <q-btn to="/cart" color="primary" class="q-ml-md"><q-icon name="shopping_cart"></q-icon> {{ cart.length }}</q-btn>
       </q-toolbar>
       <div class="text-right q-pa-sm">
         <span class="">Total price: {{ totalPrice }}</span>
       </div>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      side="left"
-      bordered
-      class="column wrap justify-start items-start q-pa-xl MsMainLayoutDrawer"
-    >
-      <q-btn
-        to="/catalog"
-        color="secondary"
-        label="Catalog"
-        class="q-mb-sm"
-      ></q-btn>
-      <q-btn
-        color="secondary"
-        label="Add product"
-        to="/add"
-        class="q-mb-sm"
-      ></q-btn>
+    <q-drawer v-model="leftDrawerOpen" side="left" bordered
+      class="column wrap justify-start items-start q-pa-xl MsMainLayoutDrawer">
+      <q-btn to="/catalog" color="secondary" label="Catalog" class="q-mb-sm"></q-btn>
+      <q-btn color="secondary" label="Add product" to="/add" class="q-mb-sm"></q-btn>
 
-      <q-btn-dropdown
-        class="glossy"
-        color="primary"
-        label="Categories"
-        v-show="store.isCatalog"
-      >
+      <q-btn-dropdown class="glossy" color="primary" label="Categories" v-show="store.isCatalog">
         <div class="row no-wrap q-pa-md">
           <q-form @submit="onSubmit">
             <div class="column">
-              <q-toggle
-                name="clothes"
-                v-model="tshirt"
-                label="T-shirt"
-                true-value="T-shirt"
-              ></q-toggle>
-              <q-toggle
-                name="clothes"
-                v-model="shoes"
-                label="Shoes"
-                true-value="Shoes"
-              ></q-toggle>
-              <q-toggle
-                name="clothes"
-                v-model="underwear"
-                label="Underwear"
-                true-value="Underwear"
-              ></q-toggle>
+              <q-toggle name="clothes" v-model="tshirt" label="T-shirt" true-value="T-shirt"></q-toggle>
+              <q-toggle name="clothes" v-model="shoes" label="Shoes" true-value="Shoes"></q-toggle>
+              <q-toggle name="clothes" v-model="underwear" label="Underwear" true-value="Underwear"></q-toggle>
             </div>
             <div class="flex justify-end">
               <q-btn label="Submit" type="submit" color="secondary"></q-btn>
@@ -133,17 +90,12 @@ import { queries } from "src/graphql/queries";
 import { useStore } from "../store/filter";
 import apolloClient from "../apollo/client.js";
 import { useRouter } from "vue-router";
+import { login, logout } from '../sdk/user.js'
 
 provideApolloClient(apolloClient);
 
 export default {
   setup() {
-    const logout = async () => {
-      await window.Clerk.signOut();
-    };
-    const login = async ({ email, password }) => {
-      window.Clerk.openSignIn();
-    };
 
     const leftDrawerOpen = ref(false);
     const tshirt = ref(null);
@@ -213,9 +165,9 @@ export default {
       totalPrice,
       toMainPage,
       getAllItems,
-      login,
-      logout,
       store,
+      login,
+      logout
     };
   },
 };
